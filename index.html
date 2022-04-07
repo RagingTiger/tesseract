@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Tesseract.js Demo</title>
+	<link rel="stylesheet" type="text/css" href="css/main.css">
+<body ondragover="return false">
+
+	<div id="splash">
+		<div id="logo-wrap" class="header">
+			<canvas id="logo-canvas"></canvas>
+		</div>
+	</div>
+
+	<div id='demo'>
+		<div id='demo-body'>
+			<div id='drop-instructions-main'><p>Drop <span class='drop-instructions'>an English</span> image on this page to OCR it!</p></div>
+			<div id='demo-content'>
+				<div>
+					<canvas id='input-overlay'></canvas>
+					<img id='input' src="img/eng_bw.png"/>
+				</div>
+				<div id='arrow'></div>
+				<div>
+					<!-- <div id='output-overlay'></div> -->
+					<!-- <textarea id='output-text'></textarea> -->
+
+					<div id='log'></div>
+					<div id='demo-instructions'>
+						<span id='clickme' onclick='play()'>Click here to recognize text in the demo image</span>, or drop <span class='drop-instructions'>an English</span> image anywhere on this page.
+					</div>
+					<!-- <canvas id='output'></canvas>	 -->
+				</div>
+			</div>
+	</div>
+
+	<script src="animation/raf.js"></script>
+	<script src="animation/mouse.js"></script>
+	<script src="animation/dimensions.js"></script>
+	<script src="animation/animate.js"></script>
+
+	<script src="https://unpkg.com/tesseract.js@2.0.0/dist/tesseract.min.js" integrity="sha384-MTEb82ufpBJ2VCTmPZlD/+vgiT5z6zmOwqU/uDO9IobYm9xCOUEN0WH3czf6ppl8" crossorigin="anonymous"></script>
+	<script src="demo.js"></script>
+</body>
+</html>
