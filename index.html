@@ -1,151 +1,152 @@
 <!DOCTYPE html>
 <html lang="en">
-	<head>
-		<meta charset="utf-8"/>
-		<meta name="viewport" content="width=device-width, initial-scale=1">
-		<title>Tesseract.js Demo</title>
-		<link rel="stylesheet" type="text/css" href="css/main.css">
-	</head>
-	<body ondragover="return false">
-		<div id="splash">
-			<div id="logo-wrap" class="header">
-				<canvas id="logo-canvas"></canvas>
-			</div>
-		</div>
-		<div id='demo'>
-			<div id='demo-body'>
-				<div id='drop-instructions-main'>
-					<p>
-						Drop an image with
-						<select id="langsel" onchange='resetNewLang()'>
-							<option value='afr'     > Afrikaans             </option>
-							<option value='ara'     > Arabic                </option>
-							<option value='aze'     > Azerbaijani           </option>
-							<option value='bel'     > Belarusian            </option>
-							<option value='ben'     > Bengali               </option>
-							<option value='bul'     > Bulgarian             </option>
-							<option value='cat'     > Catalan               </option>
-							<option value='ces'     > Czech                 </option>
-							<option value='chi_sim' > Chinese               </option>
-							<option value='chi_tra' > Traditional Chinese   </option>
-							<option value='chr'     > Cherokee              </option>
-							<option value='dan'     > Danish                </option>
-							<option value='deu'     > German                </option>
-							<option value='ell'     > Greek                 </option>
-							<option value='eng' selected> English           </option>
-							<option value='enm'     > English (Old)         </option>
-							<option value='meme'    > Internet Meme         </option>
-							<option value='epo'     > Esperanto             </option>
-							<option value='epo_alt' > Esperanto alternative </option>
-							<option value='equ'     > Math                  </option>
-							<option value='est'     > Estonian              </option>
-							<option value='eus'     > Basque                </option>
-							<option value='fin'     > Finnish               </option>
-							<option value='fra'     > French                </option>
-							<option value='frk'     > Frankish              </option>
-							<option value='frm'     > French (Old)          </option>
-							<option value='glg'     > Galician              </option>
-							<option value='grc'     > Ancient Greek         </option>
-							<option value='heb'     > Hebrew                </option>
-							<option value='hin'     > Hindi                 </option>
-							<option value='hrv'     > Croatian              </option>
-							<option value='hun'     > Hungarian             </option>
-							<option value='ind'     > Indonesian            </option>
-							<option value='isl'     > Icelandic             </option>
-							<option value='ita'     > Italian               </option>
-							<option value='ita_old' > Italian (Old)         </option>
-							<option value='jpn'     > Japanese              </option>
-							<option value='kan'     > Kannada               </option>
-							<option value='kor'     > Korean                </option>
-							<option value='lav'     > Latvian               </option>
-							<option value='lit'     > Lithuanian            </option>
-							<option value='mal'     > Malayalam             </option>
-							<option value='mkd'     > Macedonian            </option>
-							<option value='mlt'     > Maltese               </option>
-							<option value='msa'     > Malay                 </option>
-							<option value='nld'     > Dutch                 </option>
-							<option value='nor'     > Norwegian             </option>
-							<option value='pol'     > Polish                </option>
-							<option value='por'     > Portuguese            </option>
-							<option value='ron'     > Romanian              </option>
-							<option value='rus'     > Russian               </option>
-							<option value='slk'     > Slovakian             </option>
-							<option value='slv'     > Slovenian             </option>
-							<option value='spa'     > Spanish               </option>
-							<option value='spa_old' > Old Spanish           </option>
-							<option value='sqi'     > Albanian              </option>
-							<option value='srp'     > Serbian (Latin)       </option>
-							<option value='swa'     > Swahili               </option>
-							<option value='swe'     > Swedish               </option>
-							<option value='tam'     > Tamil                 </option>
-							<option value='tel'     > Telugu                </option>
-							<option value='tgl'     > Tagalog               </option>
-							<option value='tha'     > Thai                  </option>
-							<option value='tur'     > Turkish               </option>
-							<option value='ukr'     > Ukrainian             </option>
-							<option value='vie'     > Vietnamese            </option>
-						</select>
-						text on this page to OCR it!
-					</p>
-				</div>
-				<div id='demo-content'>
-					<div>
-						<canvas id='input-overlay'></canvas>
-						<img id='input' src="img/eng_bw.png"/>
-					</div>
-					<div id='arrow'></div>
-					<div>
-						<!-- <div id='output-overlay'></div> -->
-						<!-- <textarea id='output-text'></textarea> -->
-						<div id='log'></div>
-						<div id='demo-instructions'>
-							<span id='clickme' onclick='play()'>Click here to recognize image text</span>
-							or drop an image with
-							<span id='drop-instructions'>English</span>
-							text.
-						</div>
-						<!-- <canvas id='output'></canvas>	 -->
-					</div>
-				</div>
-				<div class='get-started-wrap'>
-					<a href="https://github.com/RagingTiger/tesseract/tree/tesseract.js">
-					<div class='get-started'>
-						<svg id="github" viewBox="0 0 16 16" aria-hidden="true">
-							<path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47
-											 7.59.4.07.55-.17.55-.38
-											 0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09
-											 -.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
-											 1.08.58 1.23.82.72 1.21 1.87.87
-											 2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
-											 0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0
-											 .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
-											 1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
-											 1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54
-											 1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013
-											 8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
-								</path>
-						</svg>
-						Source
-					</div>
-					</a>
-				</div>
-		</div>
-		<script src="https://unpkg.com/tesseract.js@2.0.0/dist/tesseract.min.js"
-		        integrity="sha384-MTEb82ufpBJ2VCTmPZlD/+vgiT5z6zmOwqU/uDO9IobYm9xCOUEN0WH3czf6ppl8"
-						crossorigin="anonymous">
-		</script>
-		<script src="demo.js"></script>
-		<script>
-			// NOTE: source demo.js
-			// listen for image being 'dropped' onto browser window
-			document.body.addEventListener('drop', droppedImageOCR)
+  <head>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Tesseract.js Demo</title>
+    <link rel="stylesheet" type="text/css" href="css/main.css">
+  </head>
+  <body ondragover="return false">
+    <div id="splash">
+      <div id="logo-wrap" class="header">
+        <canvas id="logo-canvas"></canvas>
+      </div>
+    </div>
+    <div id='demo'>
+      <div id='demo-body'>
+        <div id='drop-instructions-main'>
+          <p>
+            Drop an image with
+            <select id="langsel" onchange='resetNewLang()'>
+              <option value='afr'     > Afrikaans             </option>
+              <option value='ara'     > Arabic                </option>
+              <option value='aze'     > Azerbaijani           </option>
+              <option value='bel'     > Belarusian            </option>
+              <option value='ben'     > Bengali               </option>
+              <option value='bul'     > Bulgarian             </option>
+              <option value='cat'     > Catalan               </option>
+              <option value='ces'     > Czech                 </option>
+              <option value='chi_sim' > Chinese               </option>
+              <option value='chi_tra' > Traditional Chinese   </option>
+              <option value='chr'     > Cherokee              </option>
+              <option value='dan'     > Danish                </option>
+              <option value='deu'     > German                </option>
+              <option value='ell'     > Greek                 </option>
+              <option value='eng' selected> English           </option>
+              <option value='enm'     > English (Old)         </option>
+              <option value='meme'    > Internet Meme         </option>
+              <option value='epo'     > Esperanto             </option>
+              <option value='epo_alt' > Esperanto alternative </option>
+              <option value='equ'     > Math                  </option>
+              <option value='est'     > Estonian              </option>
+              <option value='eus'     > Basque                </option>
+              <option value='fin'     > Finnish               </option>
+              <option value='fra'     > French                </option>
+              <option value='frk'     > Frankish              </option>
+              <option value='frm'     > French (Old)          </option>
+              <option value='glg'     > Galician              </option>
+              <option value='grc'     > Ancient Greek         </option>
+              <option value='heb'     > Hebrew                </option>
+              <option value='hin'     > Hindi                 </option>
+              <option value='hrv'     > Croatian              </option>
+              <option value='hun'     > Hungarian             </option>
+              <option value='ind'     > Indonesian            </option>
+              <option value='isl'     > Icelandic             </option>
+              <option value='ita'     > Italian               </option>
+              <option value='ita_old' > Italian (Old)         </option>
+              <option value='jpn'     > Japanese              </option>
+              <option value='kan'     > Kannada               </option>
+              <option value='kor'     > Korean                </option>
+              <option value='lav'     > Latvian               </option>
+              <option value='lit'     > Lithuanian            </option>
+              <option value='mal'     > Malayalam             </option>
+              <option value='mkd'     > Macedonian            </option>
+              <option value='mlt'     > Maltese               </option>
+              <option value='msa'     > Malay                 </option>
+              <option value='nld'     > Dutch                 </option>
+              <option value='nor'     > Norwegian             </option>
+              <option value='pol'     > Polish                </option>
+              <option value='por'     > Portuguese            </option>
+              <option value='ron'     > Romanian              </option>
+              <option value='rus'     > Russian               </option>
+              <option value='slk'     > Slovakian             </option>
+              <option value='slv'     > Slovenian             </option>
+              <option value='spa'     > Spanish               </option>
+              <option value='spa_old' > Old Spanish           </option>
+              <option value='sqi'     > Albanian              </option>
+              <option value='srp'     > Serbian (Latin)       </option>
+              <option value='swa'     > Swahili               </option>
+              <option value='swe'     > Swedish               </option>
+              <option value='tam'     > Tamil                 </option>
+              <option value='tel'     > Telugu                </option>
+              <option value='tgl'     > Tagalog               </option>
+              <option value='tha'     > Thai                  </option>
+              <option value='tur'     > Turkish               </option>
+              <option value='ukr'     > Ukrainian             </option>
+              <option value='vie'     > Vietnamese            </option>
+            </select>
+            text on this page to OCR it!
+          </p>
+        </div>
+        <div id='demo-content'>
+          <div>
+            <canvas id='input-overlay'></canvas>
+            <img id='input' src="img/eng_bw.png"/>
+          </div>
+          <div id='arrow'></div>
+          <div>
+            <!-- <div id='output-overlay'></div> -->
+            <!-- <textarea id='output-text'></textarea> -->
+            <div id='log'></div>
+            <div id='demo-instructions'>
+              <span id='clickme' onclick='play()'>Click here to recognize image text</span>
+              or drop an image with
+              <span id='drop-instructions'>English</span>
+              text.
+            </div>
+            <!-- <canvas id='output'></canvas>	 -->
+          </div>
+        </div>
+        <div class='get-started-wrap'>
+          <a href="https://github.com/RagingTiger/tesseract/tree/tesseract.js">
+            <div class='get-started'>
+              <svg id="github" viewBox="0 0 16 16" aria-hidden="true">
+                <path d="M8 0C3.58 0 0 3.58 0 8c0 3.54 2.29 6.53 5.47
+                         7.59.4.07.55-.17.55-.38
+                         0-.19-.01-.82-.01-1.49-2.01.37-2.53-.49-2.69-.94-.09
+                         -.23-.48-.94-.82-1.13-.28-.15-.68-.52-.01-.53.63-.01
+                         1.08.58 1.23.82.72 1.21 1.87.87
+                         2.33.66.07-.52.28-.87.51-1.07-1.78-.2-3.64-.89-3.64-3.95
+                         0-.87.31-1.59.82-2.15-.08-.2-.36-1.02.08-2.12 0 0
+                         .67-.21 2.2.82.64-.18 1.32-.27 2-.27.68 0 1.36.09 2 .27
+                         1.53-1.04 2.2-.82 2.2-.82.44 1.1.16 1.92.08 2.12.51.56.82
+                         1.27.82 2.15 0 3.07-1.87 3.75-3.65 3.95.29.25.54.73.54
+                         1.48 0 1.07-.01 1.93-.01 2.2 0 .21.15.46.55.38A8.013
+                         8.013 0 0 0 16 8c0-4.42-3.58-8-8-8z">
+                  </path>
+                </svg>
+              Source
+            </div>
+          </a>
+        </div>
+      </div>
+    </div>
+    <script src="https://unpkg.com/tesseract.js@2.0.0/dist/tesseract.min.js"
+            integrity="sha384-MTEb82ufpBJ2VCTmPZlD/+vgiT5z6zmOwqU/uDO9IobYm9xCOUEN0WH3czf6ppl8"
+            crossorigin="anonymous">
+    </script>
+    <script src="demo.js"></script>
+    <script>
+      // NOTE: source demo.js
+      // listen for image being 'dropped' onto browser window
+      document.body.addEventListener('drop', droppedImageOCR)
 
-			// setup image dims
-			setUp()
-			input.onload = setUp
+      // setup image dims
+      setUp()
+      input.onload = setUp
 
-			// execute inital demo on window load
-			startDemo()
-		</script>
-	</body>
+      // execute inital demo on window load
+      startDemo()
+    </script>
+  </body>
 </html>
