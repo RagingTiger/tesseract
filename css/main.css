@@ -7,12 +7,6 @@ body, html{
   font-weight: 300;
 }
 
-#slogan {
-  text-align: center;
-  margin-top: -26px;
-  color: #fff;
-}
-
 #splash {
   overflow: hidden;
   background-size: cover;
@@ -38,10 +32,6 @@ body, html{
   position: absolute;
 }
 
-#logo-img {
-  max-width: 100%;
-}
-
 .get-started-wrap {
   text-align: center;
   position: relative;
@@ -57,39 +47,6 @@ body, html{
   margin: 50px 0;
   border-radius: 7px;
   box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-}
-
-#demo-title {
-  padding: 40px 0;
-  color: #714d26;
-  font-size: 30px;
-  // text-align: center;
-}
-
-
-#options {
-  display: flex;
-  justify-content: space-around;
-  font-size: 20px;
-  color: #3580c0;
-  padding: 0 15px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  box-sizing: border-box;
-}
-
-.option {
-  padding: 10px;
-  border-radius: 5px;
-  cursor: pointer;
-  text-align: center;
-}
-
-.option.selected {
-  color: #3580c0;
-  background: #d8edff;
-  font-weight: 400;
 }
 
 #input {
@@ -130,23 +87,6 @@ body, html{
   content: '\2193'
 }
 
-#output {
-  max-width: 100%;
-  box-sizing: border-box;
-  padding: 20px;
-}
-
-#output-overlay {
-  white-space: pre;
-  font-family: Monaco, monospace;
-  position: absolute;
-  height: 100%;
-  width: 100%;
-  overflow: scroll;
-  border: 20px solid transparent;
-  box-sizing: border-box;
-}
-
 #clickme {
   color: #2374b7;
   text-decoration: underline;
@@ -160,18 +100,6 @@ body, html{
   padding: 0 20px;
 }
 
-#lengle {
-  margin-top: 8%;
-  margin-bottom: 8%;
-  line-height: normal;
-  display: inline-block;
-  vertical-align: middle;
-}
-
-#lengle img {
-  height: .7em;
-}
-
 #demo-content > div {
   position: relative;
   flex: 1;
@@ -180,25 +108,6 @@ body, html{
 
 #drop-instructions-main {
   display: none;
-}
-
-.commentary {
-  position: relative;
-  padding: 20px;
-  max-width: 700px;
-  margin-left: auto;
-  margin-right: auto;
-  line-height: 180%;
-  letter-spacing: .5  px;
-}
-
-#output-text {
-  margin: 0px;
-  width: 100%;
-  min-height: 200px;
-  box-sizing: border-box;
-  padding: 20px;
-  border: 1px solid #ddd;
 }
 
 #demo-instructions {
@@ -212,14 +121,15 @@ body, html{
   padding: 10px 0;
   display: flex;
 }
+
 #log > div:first-child {
   border: 0;
 }
 
-
 #log .status {
   min-width: 250px;
 }
+
 #log {
   border: 1px solid #dadada;
   padding: 20px;
@@ -231,25 +141,9 @@ body, html{
   width: 100%;
   transition: opacity 0.5s linear;
 }
+
 #log progress[value="1"] {
   opacity: 0.5;
-}
-
-
-#footer {
-  color: #ffffff;
-  background-color: #f6f6f6;
-  text-align: right;
-  padding: 0 20px;
-  background-color: #425565;
-  background: url(../img/bg.jpg);
-  background-size: cover;
-  background-position: bottom;
-}
-
-#footer a {
-  color: white !important;
-
 }
 
 @media (min-width: 900px) {
@@ -275,36 +169,4 @@ body, html{
   #options {
     margin: 40px auto;
   }
-
-  // #demo-title {
-  //   width: 250px;
-  //   background: #fff;
-  //   margin-top: -70px;
-  //   margin-left: 40px;
-  //   position: relative;
-  //   padding: 20px 0;
-  // }
-
-  // #demo-title::after {
-  //     border-right: 40px solid transparent;
-  //     border-bottom: 70px solid white;
-  //     content: ' ';
-  //     position: absolute;
-  //     top: 0;
-  //     left: 100%;
-  // }
-
-  // #demo-title::before {
-  //     border-left: 40px solid transparent;
-  //     border-bottom: 70px solid white;
-  //     content: ' ';
-  //     position: absolute;
-  //     top: 0;
-  //     left: -40px;
-  // }
-
-  // body {
-  //   box-sizing: border-box;
-  //   border: 20px solid #425565;
-  // }
 }
