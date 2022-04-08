@@ -118,5 +118,17 @@
 		</div>
 		<script src="https://unpkg.com/tesseract.js@2.0.0/dist/tesseract.min.js" integrity="sha384-MTEb82ufpBJ2VCTmPZlD/+vgiT5z6zmOwqU/uDO9IobYm9xCOUEN0WH3czf6ppl8" crossorigin="anonymous"></script>
 		<script src="demo.js"></script>
+		<script>
+			// NOTE: source demo.js
+			// listen for image being 'dropped' onto browser window
+			document.body.addEventListener('drop', droppedImageOCR)
+
+			// setup image dims
+			setUp()
+			input.onload = setUp
+
+			// execute inital demo on window load
+			startDemo()
+		</script>
 	</body>
 </html>

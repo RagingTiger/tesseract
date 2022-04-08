@@ -21,9 +21,6 @@ function setUp(){
 	output_text.style.height = input.height + 'px'
 }
 
-setUp()
-input.onload = setUp
-
 // initial demo start when page fully loads
 function startDemo(){
 	demoStarted = true
@@ -100,8 +97,6 @@ function result(res){
 	})
 }
 
-startDemo()
-
 // clear log window after selecting new language
 function clearOverLayAndOutput(){
 	ioctx.clearRect(0,0, input_overlay.width, input_overlay.height)
@@ -133,25 +128,25 @@ function resetNewLang(){
 	language = langSel.value;
 }
 
-// listen for image being 'dropped' onto browser window
-document.body.addEventListener('drop', async function(e){
-	demo_instructions.style.display = 'none'
-	output_text.style.display = 'block'
-	output_text.innerHTML = ''
-	e.stopPropagation();
-    e.preventDefault();
-    var file = e.dataTransfer.files[0]
-	var reader = new FileReader();
-	reader.onload = function(e){
-		input.src = e.target.result;
-		input.onload = function(){
-			setUp();
-		}
-	};
-	reader.readAsDataURL(file);
-  await worker.load();
-  await worker.loadLanguage(language);
-  await worker.initialize(language);
-  const { data } = await worker.recognize(file);
-  result(data);
-})
+// run Tesseract OCR on a dropped image
+async function droppedImageOCR(e){
+	 demo_instructions.style.display = 'none'
+	 output_text.style.display = 'block'
+	 output_text.innerHTML = ''
+	 e.stopPropagation();
+	 e.preventDefault();
+	 var file = e.dataTransfer.files[0]
+	 var reader = new FileReader();
+	 reader.onload = function(e){
+		 input.src = e.target.result;
+		 input.onload = function(){
+			 setUp();
+		 }
+	 };
+	 reader.readAsDataURL(file);
+		await worker.load();
+		await worker.loadLanguage(language);
+		await worker.initialize(language);
+		const { data } = await worker.recognize(file);
+		result(data);
+}
