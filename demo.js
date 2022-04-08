@@ -1,34 +1,19 @@
+// global vars
 var input = document.getElementById('input')
 var input_overlay = document.getElementById('input-overlay')
 var ioctx = input_overlay.getContext('2d')
-// var output = document.getElementById('output')
-// var output_overlay = document.getElementById('output-overlay')
 var output_text = document.getElementById('log')
-
 var demo_instructions = document.getElementById('demo-instructions')
-
 var drop_instructions = document.getElementById('drop-instructions')
-var options = [].slice.call(document.querySelectorAll('.option'))
-
-// var octx = output.getContext('2d')
 var language = document.getElementById('langsel').value
 var demoStarted = false
-var lang_demo_images = {
-	eng: 'img/eng_bw.png',
-	chi_sim: 'img/chi_sim.png',
-	rus: 'img/rus.png'
-}
 
-var lang_drop_instructions = {
-	eng: 'an English',
-	chi_sim: 'a Chinese',
-	rus: 'a Russian'
-}
-
+// setting up Tesseract worker
 var worker = new Tesseract.createWorker({
   logger: progressUpdate,
 });
 
+// for adjusting image dimensions on load and drop
 function setUp(){
 	input_overlay.width = input.naturalWidth
 	input_overlay.height = input.naturalHeight
@@ -39,15 +24,7 @@ function setUp(){
 setUp()
 input.onload = setUp
 
-
-function isOutputVisible(){
-	return output_text.getBoundingClientRect().top < dimensions.height
-}
-
-function startDemoIfVisible(argument) {
-	startDemo();
-}
-
+// initial demo start when page fully loads
 function startDemo(){
 	demoStarted = true
 
@@ -65,19 +42,7 @@ function startDemo(){
 	else input.addEventListener('load', start)
 }
 
-// function progress(p){
-// 	var text = JSON.stringify(p)
-
-// 	// octx.clearRect(0, 0, output.width, output.height)
-
-// 	// octx.textAlign = 'center'
-// 	// octx.fillText(text, output.width/2, output.height/2)
-// 	output_overlay.style.display = 'block'
-// 	output_overlay.innerHTML += output_overlay.innerHTML.length ? "\n" + text : text
-// 	output_overlay.scrollTop = output_overlay.scrollHeight;
-// }
-
-
+// generates progress bars in log output (on screen)
 function progressUpdate(packet){
 	var log = document.getElementById('log');
 
@@ -114,13 +79,9 @@ function progressUpdate(packet){
 	}
 }
 
+// displays detected words results on screen
 function result(res){
-	// octx.clearRect(0, 0, output.width, output.height)
-	// octx.textAlign = 'left'
-
 	console.log('result was:', res)
-	// output_overlay.style.display = 'none'
-	// output_text.innerHTML = res.text
 
 	progressUpdate({ status: 'done', data: res })
 
@@ -136,45 +97,26 @@ function result(res){
 		ioctx.lineTo(w.baseline.x1, w.baseline.y1)
 		ioctx.strokeStyle = 'green'
 		ioctx.stroke()
-
-
-        // octx.font = '20px Times';
-        // octx.font = 20 * (b.x1 - b.x0) / octx.measureText(w.text).width + "px Times";
-        // octx.fillText(w.text, b.x0, w.baseline.y0);
 	})
 }
 
-startDemoIfVisible()
+startDemo()
 
-
+// clear log window after selecting new language
 function clearOverLayAndOutput(){
 	ioctx.clearRect(0,0, input_overlay.width, input_overlay.height)
 
 	output_text.style.display = 'none'
 
 	demo_instructions.style.display = 'block'
-
-	// octx.clearRect(0,0,output.width, output.height)
 }
 
-
-// function displayPlayButtonFor(lang){
-// 	output.addEventListener('click', function play(){
-// 		output.removeEventListener('click', play)
-
-// 		tessWorker.recognize(input, lang)
-// 		.progress( progress )
-// 		.then( result )
-// 	})
-// }
-
-
+// executes Tesseract.js OCR (on click) after selecting new language
 async function play(){
 
 	demo_instructions.style.display = 'none'
 	output_text.style.display = 'block'
 	output_text.innerHTML = ''
-	// output_overlay.innerHTML = ''
 
   await worker.load();
   await worker.loadLanguage(language);
@@ -183,6 +125,7 @@ async function play(){
   result(data);
 }
 
+// updated necessary variables/HTML text after new lang selected
 function resetNewLang(){
 	clearOverLayAndOutput();
 	let langSel = document.getElementById('langsel');
@@ -190,7 +133,7 @@ function resetNewLang(){
 	language = langSel.value;
 }
 
-
+// listen for image being 'dropped' onto browser window
 document.body.addEventListener('drop', async function(e){
 	demo_instructions.style.display = 'none'
 	output_text.style.display = 'block'
@@ -202,9 +145,7 @@ document.body.addEventListener('drop', async function(e){
 	reader.onload = function(e){
 		input.src = e.target.result;
 		input.onload = function(){
-
 			setUp();
-
 		}
 	};
 	reader.readAsDataURL(file);
