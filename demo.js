@@ -57,6 +57,13 @@ function progressUpdate(packet){
 			progress.value = packet.progress;
 		}
 	} else{
+    // make sure to finish previous progress bar
+    if(log.firstChild){
+      // get progress element and set value to max
+			let progress = log.firstChild.querySelector('progress');
+			progress.value = progress.max;
+    }
+
     // creating new div element to "contain" the progress status
 		var line = document.createElement('div');
 		line.title = packet.status;
