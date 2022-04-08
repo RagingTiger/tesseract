@@ -6,7 +6,6 @@ var output_text = document.getElementById('log');
 var demo_instructions = document.getElementById('demo-instructions');
 var drop_instructions = document.getElementById('drop-instructions');
 var language = document.getElementById('langsel').value;
-var demoStarted = false;
 
 // setting up Tesseract worker
 var worker = new Tesseract.createWorker({
@@ -23,7 +22,6 @@ function setUp(){
 
 // initial demo start when page fully loads
 function startDemo(){
-	demoStarted = true;
 	// Tesseract OCR engine call
 	async function start(){
 		// setup Tesseract worker
