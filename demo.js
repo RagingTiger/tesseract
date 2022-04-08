@@ -7,11 +7,11 @@ var output_text = document.getElementById('log')
 
 var demo_instructions = document.getElementById('demo-instructions')
 
-var drop_instructions = [].slice.call(document.querySelectorAll('.drop-instructions'))
+var drop_instructions = document.getElementById('drop-instructions')
 var options = [].slice.call(document.querySelectorAll('.option'))
 
 // var octx = output.getContext('2d')
-var language = 'eng'
+var language = document.getElementById('langsel').value
 var demoStarted = false
 var lang_demo_images = {
 	eng: 'img/eng_bw.png',
@@ -53,8 +53,8 @@ function startDemo(){
 
 	async function start(){
     await worker.load();
-    await worker.loadLanguage('eng');
-    await worker.initialize('eng');
+    await worker.loadLanguage(language);
+    await worker.initialize(language);
     const { data } = await worker.recognize(input);
     result(data);
 
@@ -183,29 +183,18 @@ async function play(){
   result(data);
 }
 
-options.forEach(function(option){
-	option.addEventListener('click', function(){
-
-		clearOverLayAndOutput()
-
-
-		drop_instructions.forEach(function(di){
-			di.innerHTML = lang_drop_instructions[option.lang]
-		})
-
-		language = option.lang
-
-		options.forEach(function(option){option.className = 'option'})
-		option.className = 'option selected'
-		if(option.lang in lang_demo_images){
-			input.src = lang_demo_images[option.lang]
-			// displayPlayButtonFor(option.lang)
-		}
-	})
-})
+function resetNewLang(){
+	clearOverLayAndOutput();
+	let langSel = document.getElementById('langsel');
+	drop_instructions.innerHTML = langSel.options[langSel.selectedIndex].text;
+	language = langSel.value;
+}
 
 
 document.body.addEventListener('drop', async function(e){
+	demo_instructions.style.display = 'none'
+	output_text.style.display = 'block'
+	output_text.innerHTML = ''
 	e.stopPropagation();
     e.preventDefault();
     var file = e.dataTransfer.files[0]
