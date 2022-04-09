@@ -11,6 +11,7 @@ var language = document.getElementById('langsel').value;
 var worker = new Tesseract.createWorker({
   // function that gets passed the updates from Tesseract.js progress
   logger: progressUpdate,
+  errorHandler: progressError,
 });
 
 // for adjusting image dimensions on load and drop
@@ -42,6 +43,29 @@ function startDemo(){
   // if loaded start the demo otherwise listen for load
   if(input.complete) start();
   else input.addEventListener('load', start);
+}
+
+function progressError(error){
+  // get html element for log output
+  var log = document.getElementById('log');
+
+  // creating new div element to "contain" error message
+  var line = document.createElement('div');
+  line.title = 'error';
+
+  // creating inner "status" element
+  var status = document.createElement('div');
+
+  // now insert error message into "status" div inside of "line"
+  status.appendChild(document.createTextNode(`
+    Uh oh! An error occured in the previous step.
+    Check the console for more detail.
+  `));
+  line.appendChild(status);
+
+  // finally insert into top of log window and write error to console
+  log.insertBefore(line, log.firstChild);
+  console.error(error);
 }
 
 // generates progress bars in log output (on screen)
