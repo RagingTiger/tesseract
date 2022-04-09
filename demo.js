@@ -45,6 +45,7 @@ function startDemo(){
   else input.addEventListener('load', start);
 }
 
+// log error message when Tesseract fails
 function progressError(error){
   // get html element for log output
   var log = document.getElementById('log');
@@ -201,6 +202,27 @@ function resetNewLang(){
   language = langSel.value;
 }
 
+// run Tesseract on file system uploaded image
+function displayUploadImage(){
+  // clear any existing output (progress bars or recognized text)
+  clearOverLayAndOutput();
+
+  // get dropped image file
+  var file = document.getElementById('os-upload').files[0];
+
+  // setup file reader for new image
+  var reader = new FileReader();
+  reader.onload = function(e){
+    input.src = e.target.result;
+    input.onload = function(){
+      setUp();
+    };
+  };
+
+  // read new image and display/setup in window
+  reader.readAsDataURL(file);
+}
+
 // run Tesseract OCR on a dropped image
 async function droppedImageOCR(e){
   //reset
@@ -221,6 +243,9 @@ async function droppedImageOCR(e){
       setUp();
     };
   };
+
+  // wipe any remaing os uploaded files
+  document.getElementById('os-upload').value = '';
 
   // read new image and display/setup in window
   reader.readAsDataURL(file);

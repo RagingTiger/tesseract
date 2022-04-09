@@ -107,7 +107,13 @@ body, html{
 }
 
 #drop-instructions-main {
-  display: none;
+  color: #b1a79c;
+}
+
+#drop-instructions-main > div {
+  position: relative;
+  flex: 1;
+  border: 20px solid transparent;
 }
 
 #demo-instructions {
