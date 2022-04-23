@@ -176,3 +176,24 @@ body, html{
     margin: 40px auto;
   }
 }
+
+@media (prefers-color-scheme: dark) {
+  body {
+    background: #333;
+    color: #FFF;
+  }
+
+  #log > div {
+    color: #FFF;
+  }
+
+  .get-started {
+    background: #333;
+    color: #b1a79c;
+    box-shadow: 0 10px 30px rgba(255, 255, 255, 0.75);
+  }
+
+  #github path {
+    fill: #b1a79c;
+  }
+}
